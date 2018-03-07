@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    //检验有没有进入jQuery方法
+   /*  $(function(){
+    	alert("123");
+    }); */
+
+
+    function fn1(){
+    	
+    	//get异步访问
+    	$.get(
+    	    "/WEB22_ajax/ajaxServlet",//url地址
+    	    {"name":"张三","age":28},//请求参数
+    	    function(data){//执行成功后的回调函数
+    	    	//{\"name\":\"lisi\",\"age\":44}
+    	    	alert(data.name);
+    	    },
+    	    "json"
+    	);
+    }
+
+		function fn2() {
+	
+			//post异步访问
+			$.post(
+				"/WEB22_ajax/ajaxServlet",//url地址
+			   {"name" : "李四","age" : 28},//请求参数
+			   function(data) {//执行成功后的回调函数
+				//{\"name\":\"lisi\",\"age\":44}
+				alert(data.name);
+			},
+			"json"
+		);
+	}
+		function fn3(){
+			$.ajax({
+				url:"/WEB22_ajax/ajaxServlet",
+				async:true,
+				type:"post",
+				data:{"name":"wangwu","age":33},
+				success:function(data){
+					alert(data.name);
+				},
+				error:function(){
+					alert("123");
+				},
+				dataType:"json"
+			});
+		}
+</script>
+
+</head>
+<body>
+    <input type="button" id="bt1" onclick="fn1()" value="getfangshi">
+    <input type="button" id="bt2" onclick="fn2()" value="postfangshi">
+    <input type="button" id="bt3" onclick="fn3()" value="ajaxfangshi">
+</body>
+</html>
